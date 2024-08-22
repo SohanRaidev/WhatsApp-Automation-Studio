@@ -6,19 +6,19 @@ The **WhatsApp Messages Automation** project automates the process of sending an
 
 ## Key Features:
 + **Automated Messaging: Send personalized or pre-defined 
-  messages to multiple contacts or groups automatically.
+  messages to multiple contacts or groups automatically.**
 
 + **Message Templates: Use customizable templates to streamline 
-  the messaging process for frequent or repetitive messages.
+  the messaging process for frequent or repetitive messages.**
 
 + **Error Handling: Includes mechanisms to handle errors ensuring 
-  reliability and stability.
+  reliability and stability.**
 
-+ **User-Friendly Configuration.
++ **User-Friendly Configuration.**
 
 ## Technologies Used:
-+ **Selenium Chrome webdriver: For interaction with browser and whatsapp web.
-+ **Python: For scripting and automation.
++ **Selenium Chrome webdriver: For interaction with browser and whatsapp web.**
++ **Python: For scripting and automation.**
 ---
 
 # Installation
@@ -37,13 +37,13 @@ The **WhatsApp Messages Automation** project automates the process of sending an
 
 1. #### Customize: > Modify the script to use message templates or handle specific automation needs.
 
-    = **Initially when running the code is configured to message a bunch of invisible character to the selected person or a group. 
+    = **Initially when running the code is configured to message a bunch of invisible character to the selected person or a group.** 
        
-    = **You can customize the script to send your own messages by modifying the `sentences` list. For example: ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` 
+    = **You can customize the script to send your own messages by modifying the `sentences` list. For example: ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]`** 
     
-    = **` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` : In this example, the script will send 4 messages. You can increase or decrease the number of messages by adding or removing items in the sentences list. 
+    = **` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` : In this example, the script will send 4 messages. You can increase or decrease the number of messages by adding or removing items in the sentences list.** 
     
-    = ** You can further add a time delay after each message sent by uncommenting the time.sleep in line 35 of the code. **
+    = **You can further add a time delay after each message sent by uncommenting the time.sleep in line 35 of the code.**
 
 2. ####  Run the script: ` python whatsapp_msg_automation.py `
 
