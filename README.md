@@ -37,11 +37,11 @@ The **WhatsApp Messages Automation** project automates the process of sending an
 
 1. #### Customize: > Modify the script to use message templates or handle specific automation needs.
 
-    = ** Initially when running the code is configured to message a bunch of invisible character to the selected person or a group. **
+    = **Initially when running the code is configured to message a bunch of invisible character to the selected person or a group. 
        
-    = ** You can customize the script to send your own messages by modifying the `sentences` list. For example: ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` **
+    = **You can customize the script to send your own messages by modifying the `sentences` list. For example: ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` 
     
-    = ** ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` : In this example, the script will send 4 messages. You can increase or decrease the number of messages by adding or removing items in the sentences list. **
+    = **` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` : In this example, the script will send 4 messages. You can increase or decrease the number of messages by adding or removing items in the sentences list. 
     
     = ** You can further add a time delay after each message sent by uncommenting the time.sleep in line 35 of the code. **
 
@@ -53,8 +53,9 @@ The **WhatsApp Messages Automation** project automates the process of sending an
 
 ---
 
-#Contribution
-###Contributions to enhance functionality, add new features, or fix bugs are welcome! Please follow the contribution guidelines:
+# Contribution.
+
+### Contributions to enhance functionality, add new features, or fix bugs are welcome! Please follow the contribution guidelines:
 
 1. Fork the repository.
 2. Create a new branch (git checkout -b feature-branch). 
@@ -63,5 +64,7 @@ The **WhatsApp Messages Automation** project automates the process of sending an
 5. Push to the branch (git push origin feature-branch).
 6. Create a pull request.
 
-   
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
    
