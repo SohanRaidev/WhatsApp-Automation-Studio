@@ -23,16 +23,15 @@ sentences = [
 ]
 
 for i in range(len(sentences)):
-    question = driver.find_element(By.XPATH , '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]')
+    question = driver.find_element(By.XPATH , '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]')
     question.click() 
    # time.sleep(0.5)
-    txtq = driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p')
+    txtq = driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div/p')
     txtq.send_keys(sentences[i])
     #time.sleep(0.5)
    # txtq.send_keys(webdriver.Keys.RETURN)
-    submitq = driver.find_element(By.XPATH , '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[2]/button')
+    submitq = driver.find_element(By.XPATH , '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[2]/button')
     submitq.click()
    # time.sleep(0.5)
 
 #-------------------------------------------------------------------------------------
-    
