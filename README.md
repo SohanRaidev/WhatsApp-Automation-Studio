@@ -114,7 +114,7 @@ For support requests, feature suggestions, or bug reports, please open an issue 
 
 <div align="center">
   <p>
-    <strong>WhatsApp Automation Studio</strong> — Developed with ❤️ by Your Name<br>
+    <strong>WhatsApp Automation Studio</strong> — Developed with ❤️ by SohanRaidev<br>
     <small>© 2025 All Rights Reserved</small>
   </p>
   <img src="logo.png" alt="WhatsApp Automation Studio" width="120" style="margin-top: 20px; opacity: 0.8;"/>
