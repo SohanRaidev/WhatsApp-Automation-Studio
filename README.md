@@ -1,70 +1,122 @@
-# WhatsApp Messages Automation
+<div align="center">
+  <img src="logo.png" alt="WhatsApp Automation Studio" width="250" style="border-radius: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"/>
+  <h1>WhatsApp Automation Studio</h1>
+  <p><strong>Professional WhatsApp Web automation for seamless messaging</strong></p>
+  
+  [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg?style=for-the-badge)](https://creativecommons.org/licenses/by-nc/4.0/)
+  ![Version](https://img.shields.io/badge/Version-V1-green?style=for-the-badge)
+  ![Platform](https://img.shields.io/badge/Platform-macOS%20|%20Windows%20|%20Linux-blue?style=for-the-badge)
+</div>
 
-## Overview
+<hr>
 
-The **WhatsApp Messages Automation** project automates the process of sending and managing WhatsApp messages using Selenium WebDriver. This tool is designed to handle repetitive messaging tasks.
+## 🚀 Automate WhatsApp Web Messaging
 
-## Key Features:
-+ **Automated Messaging: Send personalized or pre-defined 
-  messages to multiple contacts or groups automatically.**
+**WhatsApp Automation Studio** provides an intuitive interface for automating message sending through WhatsApp Web. Designed with user experience in mind, this desktop application helps you save time and effort when communicating with contacts.
 
-+ **Message Templates: Use customizable templates to streamline 
-  the messaging process for frequent or repetitive messages.**
+<div align="center">
+  <img src="assets/screenshot1.png" alt="WhatsApp Automation Studio Interface" width="90%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"/>
+  <p><em>The elegant main dashboard of WhatsApp Automation Studio</em></p>
+</div>
 
-+ **Error Handling: Includes mechanisms to handle errors ensuring 
-  reliability and stability.**
+## ✨ Actual Features
 
-+ **User-Friendly Configuration.**
+- **Multiple Message Support** - Queue and send multiple messages sequentially
+- **Message Presets** - Save and load message templates for quick reuse
+- **Natural Typing Simulation** - Messages appear as if typed by a human, with realistic pauses
+- **Custom Delay Settings** - Configure intervals between messages to maintain authenticity
+- **Randomized Message Order** - Option to shuffle your messages for more natural conversations
+- **Dark/Light Themes** - Choose your preferred visual experience
+- **Message Editor with Preview** - See how your messages will look before sending
+- **Session Management** - Persistent WhatsApp Web sessions for quick access
 
-## Technologies Used:
-+ **Selenium Chrome webdriver: For interaction with browser and whatsapp web.**
-+ **Python: For scripting and automation.**
+<div class="feature-showcase" align="center">
+  <img src="assets/screenshot2.png" alt="Message Composer View" width="90%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"/>
+  <p><em>The message composer with preset management</em></p>
+</div>
+
+## 🛠️ Installation & Setup
+
+### Prerequisites
+- Python 3.8 or higher
+- Google Chrome browser
+- Active WhatsApp account
+
+### Quick Start
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/WhatsApp-Messages-Automation.git
+
+# Navigate to the project directory
+cd WhatsApp-Messages-Automation
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch the application
+python whatsapp_msg_automation.py
+```
+
+## 📚 How to Use
+
+<div align="center">
+  <img src="assets/screenshot3.png" alt="Settings Panel" width="90%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"/>
+  <p><em>The settings panel with customizable options</em></p>
+</div>
+
+1. **Initial Setup**
+   - Launch the application and scan the QR code with your WhatsApp mobile app
+   - Go through the onboarding tutorial (first-time users only)
+
+2. **Creating Messages**
+   - Type your message in the editor with preview functionality
+   - Add multiple messages to the queue
+   - Set repeat count for each message if needed
+
+3. **Managing Presets**
+   - Save frequently used messages as presets
+   - The app comes with several default presets including emojis and fun messages
+   - Load any preset with a single click
+
+4. **Sending Messages**
+   - Log in to WhatsApp Web through the app
+   - Select a chat in WhatsApp Web
+   - Click "Start Sending" to begin the automation
+   - Monitor progress through the logs tab
+
+## 🔧 Advanced Configuration
+
+| Feature | Description | Default |
+|---------|-------------|---------|
+| Typing Speed | Adjust how fast messages appear to be typed | 0.01 sec/char |
+| Delay Range | Set minimum and maximum wait between messages | 1-3 seconds |
+| Typing Simulation | Toggle realistic typing animation | Enabled |
+| Randomize Order | Shuffle the sequence of queued messages | Disabled |
+| Session Path | Custom path for WhatsApp Web session data | User home folder |
+| Sound Effects | Enable/disable sound feedback | Enabled |
+
+## 📋 License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License** (CC BY-NC 4.0). This means:
+
+✅ You can use, share, and adapt this software
+❌ You cannot use it for commercial purposes
+❌ You must give appropriate credit to the original creator
+
+See the [LICENSE](LICENSE) file for more details.
+
+## 🤝 Support & Contribution
+
+For support requests, feature suggestions, or bug reports, please open an issue on the GitHub repository.
+
 ---
 
-# Installation
+<div align="center">
+  <p>
+    <strong>WhatsApp Automation Studio</strong> — Developed with ❤️ by Your Name<br>
+    <small>© 2025 All Rights Reserved</small>
+  </p>
+  <img src="logo.png" alt="WhatsApp Automation Studio" width="120" style="margin-top: 20px; opacity: 0.8;"/>
+</div>
 
-1. Clone the repository: ``` git clone https://github.com/SohanRaidev/WhatsApp-Messages-Automation ```
-
-2. Navigate to the project directory: ` cd Whatsapp-Messages-Automation `
-
-3. Install the required dependencies: ``` pip install -r requirements.txt ```
-
-4. Adjust the script parameters as needed: Refer USAGE section below.
-
-5. Run the script: ``` python whatsapp_msg_automation.py ```
-
-# Usage
-
-1. #### Customize: > Modify the script to use message templates or handle specific automation needs.
-
-    = **Initially when running the code is configured to message a bunch of invisible character to the selected person or a group.** 
-       
-    = **You can customize the script to send your own messages by modifying the `sentences` list. For example: ` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]`** 
-    
-    = **` sentences = [ "Hi", "Hello", "Your'e Amazing", "WOW Nice Code"]  ` : In this example, the script will send 4 messages. You can increase or decrease the number of messages by adding or removing items in the sentences list.** 
-    
-    = **You can further add a time delay after each message sent by uncommenting the time.sleep in line 35 of the code.**
-
-2. ####  Run the script: ` python whatsapp_msg_automation.py `
-
-3. #### When the script opens WhatsApp Web, you have 30 seconds to scan the QR code from your mobile device and select the chat or group. If your internet is slow or login is taking time, you can increase the 30-second timer in line 15 of the script.
-
-4. #### Boom! leave the rest on the script.
-
----
-
-# Contribution.
-
-### Contributions to enhance functionality, add new features, or fix bugs are welcome! Please follow the contribution guidelines:
-
-1. Fork the repository.
-2. Create a new branch (git checkout -b feature-branch). 
-3. Make your changes.
-4. Commit your changes (git commit -am 'Add new feature'). 
-5. Push to the branch (git push origin feature-branch).
-6. Create a pull request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-   
