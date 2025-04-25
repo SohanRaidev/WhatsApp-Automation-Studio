@@ -1,16 +1,14 @@
 name: Build Windows Executable
 
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write
     steps:
     - uses: actions/checkout@v3
     
@@ -23,7 +21,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pyinstaller
+        pip install pyinstaller pillow
         
     - name: Build Windows executable
       run: |
@@ -34,16 +32,14 @@ jobs:
         mkdir dist\assets
         xcopy /E /I assets dist\assets
         
-    - name: Upload Windows executable
+    - name: Upload Windows executable as artifact
       uses: actions/upload-artifact@v4
       with:
         name: WhatsApp-Automation-Studio-Windows
         path: dist/
         
-    - name: Upload to Release
-      if: github.event_name == 'release'
+    - name: Upload to existing release
       uses: softprops/action-gh-release@v1
-      env:
-        GITHUB_REPOSITORY: SohanRaidev/WhatsApp-Automation-Studio
       with:
-        files: dist/WhatsApp Automation Studio.exe
+        files: dist/*.exe
+        token: ${{ secrets.GITHUB_TOKEN }}
