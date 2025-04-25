@@ -85,6 +85,69 @@ COLOR_SCHEMES = {
     }
 }
 
+# Move the ConfigManager class definition above its usage
+# Ensure the ConfigManager class is defined before initializing config_manager
+class ConfigManager:
+    """Configuration manager for saving/loading settings"""
+    def __init__(self, config_path=DEFAULT_CONFIG_PATH):
+        self.config_path = config_path
+        self.config = DEFAULT_CONFIG.copy()
+        self.load_config()
+
+    def load_config(self):
+        """Load configuration from file"""
+        if os.path.exists(self.config_path):
+            try:
+                with open(self.config_path, 'r') as file:
+                    loaded_config = json.load(file)
+                    # Update only existing keys
+                    for key, value in loaded_config.items():
+                        if key in self.config:
+                            if isinstance(value, dict) and isinstance(self.config[key], dict):
+                                self.config[key].update(value)
+                            else:
+                                self.config[key] = value
+                return True
+            except Exception as e:
+                print(f"Error loading config: {e}")
+        return False
+
+    def save_config(self):
+        """Save configuration to file"""
+        try:
+            with open(self.config_path, 'w') as file:
+                json.dump(self.config, file, indent=4)
+            return True
+        except Exception as e:
+            print(f"Error saving config: {e}")
+            return False
+
+    def get(self, key):
+        """Get configuration value"""
+        if key in self.config:
+            return self.config[key]
+        return None
+
+    def set(self, key, value):
+        """Set configuration value"""
+        self.config[key] = value
+        return True
+
+    def update(self, updates):
+        """Update multiple configuration values"""
+        self.config.update(updates)
+        return True
+
+# Ensure config_manager is initialized after the ConfigManager class definition
+config_manager = ConfigManager()
+
+# Update the play_button_click_sound function to dynamically check the sound_effects setting
+# Ensure the sound_effects setting is respected immediately without requiring a restart
+def play_button_click_sound():
+    button_click_sound = os.path.join(ASSETS_DIR, "button-202966.wav")
+    if config_manager.get("sound_effects"):
+        QSound.play(button_click_sound)
+
 # Modified BounceButton class - simplify or remove if causing issues
 class BounceButton(QPushButton):
     """Button with bounce animation on click that preserves text"""
@@ -95,6 +158,8 @@ class BounceButton(QPushButton):
         
     def animate(self):
         """Simple animation that won't affect text display"""
+        # Play the button click sound
+        play_button_click_sound()
         # Just flash the background slightly
         original_style = self.styleSheet()
         self.setStyleSheet(original_style + "background-color: #128C7E;")
@@ -215,6 +280,15 @@ class MessageSender(QThread):
         total_count = len(self.messages) * self.repeat_count
         self.status_update.emit(f"Starting to send {total_count} messages...", "info")
         
+        # Play start sound
+        if self.config["sound_effects"]:
+            try:
+                start_sound = os.path.join(ASSETS_DIR, "start.wav")
+                if os.path.exists(start_sound):
+                    QSound.play(start_sound)
+            except Exception:
+                pass
+        
         # Expand messages based on repeat count
         expanded_messages = []
         for message in self.messages:
@@ -234,8 +308,24 @@ class MessageSender(QThread):
             
             if success:
                 self.status_update.emit(f"Sent message {i+1}/{total_count}", "success")
+                # Play message sent sound
+                if self.config["sound_effects"]:
+                    try:
+                        send_sound = os.path.join(ASSETS_DIR, "message_sent.wav")
+                        if os.path.exists(send_sound):
+                            QSound.play(send_sound)
+                    except Exception:
+                        pass
             else:
                 self.status_update.emit(f"Failed to send message {i+1}", "error")
+                # Play error sound
+                if self.config["sound_effects"]:
+                    try:
+                        error_sound = os.path.join(ASSETS_DIR, "error.wav")
+                        if os.path.exists(error_sound):
+                            QSound.play(error_sound)
+                    except Exception:
+                        pass
                 
             self.progress_update.emit(i+1, total_count)
             
@@ -243,6 +333,15 @@ class MessageSender(QThread):
             if i < total_count - 1:
                 delay = random.uniform(self.config["delay_min"], self.config["delay_max"])
                 time.sleep(delay)
+                
+        # Play completion sound
+        if self.config["sound_effects"] and not self.stop_requested:
+            try:
+                complete_sound = os.path.join(ASSETS_DIR, "complete.wav")
+                if os.path.exists(complete_sound):
+                    QSound.play(complete_sound)
+            except Exception:
+                pass
                 
         self.finished.emit()
 
@@ -296,7 +395,7 @@ class MessageSender(QThread):
             send_button.click()
             
             # Short wait to ensure message is sent
-            time.sleep(0.2)
+            time.sleep(0.5)
             
             return True
         except Exception as e:
@@ -537,58 +636,6 @@ class LogView(QTextEdit):
         # Append HTML and scroll to bottom
         self.append(html)
         self.moveCursor(QTextCursor.End)
-
-
-class ConfigManager:
-    """Configuration manager for saving/loading settings"""
-    def __init__(self, config_path=DEFAULT_CONFIG_PATH):
-        self.config_path = config_path
-        self.config = DEFAULT_CONFIG.copy()
-        self.load_config()
-    
-    def load_config(self):
-        """Load configuration from file"""
-        if os.path.exists(self.config_path):
-            try:
-                with open(self.config_path, 'r') as file:
-                    loaded_config = json.load(file)
-                    # Update only existing keys
-                    for key, value in loaded_config.items():
-                        if key in self.config:
-                            if isinstance(value, dict) and isinstance(self.config[key], dict):
-                                self.config[key].update(value)
-                            else:
-                                self.config[key] = value
-                return True
-            except Exception as e:
-                print(f"Error loading config: {e}")
-        return False
-    
-    def save_config(self):
-        """Save configuration to file"""
-        try:
-            with open(self.config_path, 'w') as file:
-                json.dump(self.config, file, indent=4)
-            return True
-        except Exception as e:
-            print(f"Error saving config: {e}")
-            return False
-    
-    def get(self, key):
-        """Get configuration value"""
-        if key in self.config:
-            return self.config[key]
-        return None
-    
-    def set(self, key, value):
-        """Set configuration value"""
-        self.config[key] = value
-        return True
-    
-    def update(self, updates):
-        """Update multiple configuration values"""
-        self.config.update(updates)
-        return True
 
 
 class MainWindow(QMainWindow):
@@ -917,7 +964,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(self.settings_tab)
         
         # General Settings
-        general_group = QGroupBox("⚙️ General Settings")
+        general_group = QGroupBox("General Settings")
         general_group.setFont(QFont("Segoe UI", 12, QFont.Bold))
         general_layout = QVBoxLayout()
         
@@ -1054,8 +1101,8 @@ class MainWindow(QMainWindow):
         self.message_list.itemClicked.connect(self.preview_message)
         
         # Send controls
-        self.start_btn.clicked.connect(self.start_sending)
-        self.stop_btn.clicked.connect(self.stop_sending)
+        self.start_btn.clicked.connect(lambda: (play_button_click_sound(), self.start_sending()))
+        self.stop_btn.clicked.connect(lambda: (play_button_click_sound(), self.stop_sending()))
         
         # Settings
         self.typing_speed_slider.valueChanged.connect(self.update_typing_speed_label)
@@ -1069,7 +1116,10 @@ class MainWindow(QMainWindow):
         # Presets
         self.load_preset_btn.clicked.connect(self.load_selected_preset)
         self.save_preset_btn.clicked.connect(self.save_new_preset)
-    
+        
+        # Connect the sound_effects_check toggle to apply the setting dynamically
+        self.sound_effects_check.toggled.connect(lambda checked: config_manager.set("sound_effects", checked))
+
     def apply_theme(self):
         """Apply current theme (light/dark)"""
         scheme = COLOR_SCHEMES["dark" if self.config["dark_mode"] else "light"]
@@ -1104,9 +1154,10 @@ class MainWindow(QMainWindow):
         """
         
         self.setStyleSheet(base_style)
-    
+        # Update the app icon to use the actual app logo
+        self.setWindowIcon(QIcon(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logo.png")))
+
     def show_onboarding(self):
-        """Show onboarding tutorial for first-time users"""
         self.onboarding = OnboardingScreen(self)
         self.onboarding.finished.connect(self.finish_onboarding)
         # Hide main window temporarily while showing the tutorial
@@ -1254,6 +1305,7 @@ class MainWindow(QMainWindow):
         messages = []
         for i in range(self.message_list.count()):
             item = self.message_list.item(i)
+            # Fix: Make sure we're getting the full message content stored in UserRole
             full_message = item.data(Qt.UserRole)
             messages.append(full_message)
             
@@ -1262,7 +1314,7 @@ class MainWindow(QMainWindow):
             return
         
         repeat_count = self.repeat_count_spin.value()
-        self.log(f"Starting to send messages (each repeated {repeat_count} times)...", "info")
+        self.log(f"Starting to send {len(messages)} unique messages (each repeated {repeat_count} times)...", "info")
         self.start_btn.setEnabled(False)
         self.stop_btn.setEnabled(True)
         
@@ -1378,13 +1430,13 @@ class MainWindow(QMainWindow):
                 if "messages" in preset:
                     messages = preset["messages"]
                     for msg in messages:
-                        # Add each message to the message list
+                        # Add each message to the message list as a separate item
                         display_text = (msg[:30] + "...") if len(msg) > 30 else msg
                         display_text = display_text.replace("\n", "↵")
                         
                         item = QListWidgetItem(display_text)
                         item.setToolTip(msg)
-                        item.setData(Qt.UserRole, msg)
+                        item.setData(Qt.UserRole, msg)  # Store the full message
                         self.message_list.addItem(item)
                         
                     # Show the first message in editor for preview

@@ -1,4 +1,4 @@
-# Python specific
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -19,38 +19,35 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
-# WhatsApp session folders
-whatsapp_session/
-
-# User settings
-*whatsapp_automation_config.json
-*whatsapp_automation_presets.json
-
-# System files
+# Mac files
 .DS_Store
-.DS_Store?
+.AppleDouble
+.LSOverride
 ._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
 
-# IDE specific files
-.idea/
-.vscode/
-*.swp
-*.swo
-.project
-.pydevproject
-.settings/
+# PyInstaller
+*.manifest
+*.spec
 
-# Virtual environments
-venv/
-ENV/
-env/
-.env/
+# Distribution packages
+*.dmg
+*.app
 
-# Log files
+# Logs
 *.log
 logs/
+
+# Environment
+venv/
+.env
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints

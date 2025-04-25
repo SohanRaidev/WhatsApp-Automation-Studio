@@ -1,0 +1,49 @@
+name: Build Windows Executable
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+        
+    - name: Build Windows executable
+      run: |
+        pyinstaller --onefile --windowed --icon=logo.ico --name="WhatsApp Automation Studio" whatsapp_msg_automation.py
+        
+    - name: Copy additional files
+      run: |
+        mkdir dist\assets
+        xcopy /E /I assets dist\assets
+        
+    - name: Upload Windows executable
+      uses: actions/upload-artifact@v3
+      with:
+        name: WhatsApp-Automation-Studio-Windows
+        path: dist/
+        
+    - name: Upload to Release
+      if: github.event_name == 'release'
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_REPOSITORY: SohanRaidev/WhatsApp-Automation-Studio
+      with:
+        files: dist/WhatsApp Automation Studio.exe
