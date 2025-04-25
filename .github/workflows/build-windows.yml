@@ -35,7 +35,7 @@ jobs:
         xcopy /E /I assets dist\assets
         
     - name: Upload Windows executable
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WhatsApp-Automation-Studio-Windows
         path: dist/
